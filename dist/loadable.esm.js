@@ -335,7 +335,6 @@ function resolveComponent(loadedModule, _ref) {
   var Component = loadedModule.__esModule ? loadedModule["default"] : loadedModule["default"] || loadedModule;
   console.log("!!!!!");
   console.log(Component);
-  console.log(Loadable);
 
   try {
     console.log(hoistNonReactStatics(Loadable, Component, {
