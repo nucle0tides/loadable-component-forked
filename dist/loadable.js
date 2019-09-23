@@ -11,7 +11,6 @@
   function invariant(condition, message) {
     if (condition) return;
     var error = new Error("loadable: " + message);
-    error.framesToPop = 1;
     error.name = 'Invariant Violation';
     throw error;
   }
