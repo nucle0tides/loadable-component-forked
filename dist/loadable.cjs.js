@@ -341,6 +341,10 @@ function resolveComponent(loadedModule, _ref) {
   console.log("!!!!!");
   console.log(Component);
 
+  if (!Component) {
+    throw new Error("Component is undefined");
+  }
+
   try {
     console.log(hoistNonReactStatics(Loadable, Component, {
       preload: true

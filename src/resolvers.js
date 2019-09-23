@@ -5,7 +5,9 @@ export function resolveComponent(loadedModule, { Loadable }) {
   const Component = loadedModule.__esModule ? loadedModule.default : (loadedModule.default || loadedModule)
   console.log("!!!!!");
   console.log(Component);
-
+  if (!Component) {
+    throw new Error("Component is undefined");
+  }
   try {
     console.log(
       hoistNonReactStatics(Loadable, Component, {
