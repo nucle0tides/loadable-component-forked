@@ -66,7 +66,9 @@ function createLoadable(_ref) {
       options = {};
     }
 
+    console.log("loadableConstructor");
     console.log(loadableConstructor);
+    console.log("chunkName");
     console.log(loadableConstructor.chunkName());
     var ctor;
 
@@ -125,9 +127,16 @@ function createLoadable(_ref) {
           // triggers a synchronous loading of the module
 
 
-          ctor.requireAsync(props)["catch"](function () {}); // So we can require now the module synchronously
+          ctor.requireAsync(props)["catch"](function (err) {
+            console.log("issue with loadbale async require");
+            throw new Error(err);
+          }); // So we can require now the module synchronously
 
           _this.loadSync();
+
+          console.log("createLoadable.js chunkExtractor");
+          console.log(props);
+          if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined");
 
           props.__chunkExtractor.addChunk(ctor.chunkName(props));
 
@@ -332,7 +341,7 @@ function resolveComponent(loadedModule, _ref) {
   var Loadable = _ref.Loadable;
   // eslint-disable-next-line no-underscore-dangle
   var Component = loadedModule.__esModule ? loadedModule["default"] : loadedModule["default"] || loadedModule;
-  console.log("!!!!!");
+  console.log("resolveComponent/hoistNonReactStatics");
   console.log(Component);
 
   if (!Component) {

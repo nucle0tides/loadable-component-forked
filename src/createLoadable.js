@@ -21,7 +21,9 @@ const identity = v => v
 
 function createLoadable({ resolve = identity, render, onLoad }) {
   function loadable(loadableConstructor, options = {}) {
+    console.log("loadableConstructor");
     console.log(loadableConstructor);
+    console.log("chunkName");
     console.log(loadableConstructor.chunkName());
     let ctor;
     try {
@@ -76,10 +78,17 @@ function createLoadable({ resolve = identity, render, onLoad }) {
 
           // We run load function, we assume that it won't fail and that it
           // triggers a synchronous loading of the module
-          ctor.requireAsync(props).catch(() => {})
+          ctor.requireAsync(props).catch((err) => {
+            console.log("issue with loadbale async require");
+            throw new Error(err)
+          });
 
           // So we can require now the module synchronously
           this.loadSync()
+
+          console.log("createLoadable.js chunkExtractor")
+          console.log(props);
+          if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined");
 
           props.__chunkExtractor.addChunk(ctor.chunkName(props))
           return
