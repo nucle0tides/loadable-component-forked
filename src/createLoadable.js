@@ -83,12 +83,13 @@ function createLoadable({ resolve = identity, render, onLoad }) {
             throw new Error(err)
           });
 
+          if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined");
+
           // So we can require now the module synchronously
           this.loadSync()
 
           console.log("createLoadable.js chunkExtractor")
           console.log(props);
-          if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined");
 
           props.__chunkExtractor.addChunk(ctor.chunkName(props))
           return

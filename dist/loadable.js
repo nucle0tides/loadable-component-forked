@@ -179,13 +179,13 @@
             ctor.requireAsync(props)["catch"](function (err) {
               console.log("issue with loadbale async require");
               throw new Error(err);
-            }); // So we can require now the module synchronously
+            });
+            if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined"); // So we can require now the module synchronously
 
             _this.loadSync();
 
             console.log("createLoadable.js chunkExtractor");
             console.log(props);
-            if (!props.__chunkExtractor) throw new Error("chunk extractor isn't defined");
 
             props.__chunkExtractor.addChunk(ctor.chunkName(props));
 
