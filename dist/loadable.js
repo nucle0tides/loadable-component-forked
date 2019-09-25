@@ -389,6 +389,8 @@
   function resolveComponent(loadedModule, _ref) {
     var Loadable = _ref.Loadable;
     // eslint-disable-next-line no-underscore-dangle
+    console.log("loaded module");
+    console.log(loadedModule);
     var Component = loadedModule.__esModule ? loadedModule["default"] : loadedModule["default"] || loadedModule;
     console.log("resolveComponent/hoistNonReactStatics");
     console.log(Component);

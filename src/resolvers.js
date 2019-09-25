@@ -2,6 +2,8 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 
 export function resolveComponent(loadedModule, { Loadable }) {
   // eslint-disable-next-line no-underscore-dangle
+  console.log("loaded module");
+  console.log(loadedModule);
   const Component = loadedModule.__esModule ? loadedModule.default : (loadedModule.default || loadedModule)
   console.log("resolveComponent/hoistNonReactStatics");
   console.log(Component);
